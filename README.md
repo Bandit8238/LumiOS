@@ -1,158 +1,172 @@
-<div align="center">
-	<br/>
-	<a href="https://github.com/Flow-Works/FlowOS">
-		<img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/no-bg-logo.png" width="100px">
-	</a>
-	<h3 align="center">Lumi OS</h3>
-	<p align="center">
-		Your new favorite OS.
-		<br />
-    	<a href="https://lumios.gitbook.io/lumios"><strong>Explore the wiki »</strong></a>
-    	<br />
-    	<br />
-    	<a href="https://fritzcohen.github.io/LumiOS/">Try it Out</a>
-    	·
-    	<a href="https://github.com/FritzCohen/LumiOS/issues">Report Bug</a>
-    	·
-    	<a href="https://discord.com/invite/TyacaNY3GK">Join Discord</a>
-	</p>
-</div>
+<img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/no-bg-logo.png"/>
+Your new favorite OS
 
----
 
-## Table of Contents
+# LumiOS v16 
 
-- [Features](#-features)
-- [Downloading](#downloading)
-- [Bookmarklet](#bookmarklet)
-- [Getting Started](#-getting-started)
-- [Contributing](#-contributing)
-- [Issues & Support](#issues--support)
-- [Common Issues & Fixes](#-common-issues--fixes)
-- [Todo](#todo)
-- [Terms of Use](#terms-of-use)
-- [Modification and Redistribution](#modification-and-redistribution)
 
----
-<p align="center">
-  <img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/demoscreen.png" width="49%" />
-  <img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/demoscreen2.png" width="49%" />
-</p>
+> Licensed under the Apache License 2.0
+
+
+---<img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/demoscreen.png"/><img width="2868" height="1548" alt="image" src="https://github.com/user-attachments/assets/7451cbb7-00c7-4825-a6c1-a6dc584e0251" />
+
+<img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/demoscreen2.png"/>
+
+
+
 
 ---
 
 ## Features
 
-- **Themes**, **plugins**, and much more  
-- Over **200+ games** built-in  
-- **Constant updates**  
-- Fully-functional **file system**  
-- Built-in **text editor**
+* Local proxy request routing
+* Request interception and logging
+* Middleware-based architecture
+* Security filtering rules
+* Modular and expandable structure
+* Developer-focused debugging tools
 
 ---
 
 ## Downloading
 
-Lumi OS can be run locally, so click on this [link](https://raw.githubusercontent.com/LuminesenceProject/LumiOS/main/old/LumiOS.v15.html) in order to download the file. It can also be downloaded as an about:blank page.
-- Can I run Lumi OS off of my chromebook?
-	> Yes, Lumi OS can be run from local files.
-- How do I know when to update my file?
-	> There will be a popup notifying the user of an update.
-- Why won't my changes be saved?
-	> Selecting any other file besides the one opened will break it.
+LumiOS can be run locally or built from source.
 
-### Bookmarklet
+### Download Latest Version
 
-Paste the following code into your bookmark bar and click it to run Lumi OS on any website.
+Download the latest release here:
+
+https://raw.githubusercontent.com/LuminesenceProject/LumiOS/main/LumiOS.latest.html
+
+Or clone the repository:
+
+```bash
+git clone https://github.com/your-username/dev-proxy-and-security.git
+cd dev-proxy-and-security
 ```
-javascript:(function(){(async () => {/** BUILT FOR LUMI OS NOVEMBER 17th 2024*/const fetchLink = "https://raw.githubusercontent.com/LuminesenceProject/LumiOS/refs/heads/main/Info.json";try {const response = await fetch(fetchLink);if (!response.ok) throw new Error('Failed to fetch Info.json');const fetched = await response.json();const version = fetched[0]?.version;if (!version) throw new Error('Version not found in Info.json');const downloadLink = https://raw.githubusercontent.com/LuminesenceProject/LumiOS/main/LumiOS.v${version}.html;const fileResponse = await fetch(downloadLink);if (!fileResponse.ok) throw new Error('Failed to fetch the versioned file');const content = await fileResponse.text();const popupWindow = window.open('', '_blank', 'width=800,height=600');if (!popupWindow) throw new Error("Popup window couldn't be opened. Please check your browser settings.");popupWindow.document.open();popupWindow.document.write(content);popupWindow.document.close();} catch (error) {console.error('Error:', error.message);}})();})()
+
+### Can I run this on a Chromebook?
+
+Yes you can open your file manager after downloading the link
+
+### How do I update?
+
+Download the latest release or pull the latest changes from the repository.
+
+---
+
+## Bookmarklet (Optional)
+
+You can inject a lightweight proxy helper into a page using this bookmarklet:
+
+```javascript
+javascript:(function(){alert('Dev Proxy loader placeholder - connect your hosted script here');})();
 ```
+
 ---
 
 ## Getting Started
 
-LumiOS is built using **React + TypeScript**.  
-Follow these steps to run the project locally:
+This project uses Node.js + TypeScript.
 
 ### 1. Clone the repository
+
 ```bash
-git clone https://github.com/LuminesenceProject/LumiOS.git
-cd LumiOS
+git clone https://github.com/your-username/dev-proxy-and-security.git
+cd dev-proxy-and-security
 ```
 
 ### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Run the development server
+### 3. Run development server
+
 ```bash
 npm run dev
 ```
 
 ### 4. Build for production
+
 ```bash
 npm run build
 ```
-
-### 5. Open in the browser
 
 ---
 
 ## Contributing
 
-Lumi OS is now **open-source**!  
-Games have moved to a separate repository: [lumi-games](https://github.com/LuminesenceProject/lumi-games)
+This project is open source.
 
-> When adding games, please ensure you include an **image preview**.
+* Fork the repository
+* Create a feature branch
+* Submit a pull request
 
-To get the source code, click the dropdown on main, then the version you want.
-Unfortunately old versions were lost since the code was directly updated.
-The code between major updates was completely changed. 
-
-> [!NOTE]  
-> Some feature suggestions may not be added — especially ones relying on external servers — to keep **offline functionality** intact.  
-> Game links can always be updated through the **Settings** app.
-
-**Contributors** will be credited in this repository.
+Please clearly describe any changes you make, especially security-related ones.
 
 ---
 
 ## Issues & Support
 
-To report an issue, visit the [GitHub Issues page](https://github.com/LuminesenceProject/LumiOS/issues) and click **New Issue**.  
-You can also chat with us and submit bugs on our [Discord server](https://discord.gg/TyacaNY3GK)!
+To report bugs or request features:
 
-### Common Issues & Fixes
+* Open a GitHub Issue
+* Provide logs or screenshots when possible
 
-- **White Screen Error:**  
-  This is a known issue. To fix it, type `"lumiplus"` (exact spelling) — this will **clear all local data** and reset the system.  
-  Works on version 4.2 and above, *except for v11*, where you must redownload the latest version.
+---
 
-> [!IMPORTANT]  
-> Type `"lumiplus"` in that exact order to trigger the system reset popup.
+## Common Issues & Fixes
 
-If possible, provide a screenshot or copy the error message when reporting.
+### Proxy not responding
+
+* Check if the server is running
+* Verify port configuration in `config/default.json`
+
+### Requests not logging
+
+* Ensure logging middleware is enabled
+
+### Build errors
+
+* Delete `node_modules` and reinstall dependencies
+
+```bash
+rm -rf node_modules
+npm install
+```
 
 ---
 
 ## Todo
 
-- [x] Release source code
-- [x] Fix bug relating to topbar and settings
-- [x] Fix bug with updating
-- [x] Allow for direct API access
-- [ ] Create extensions for third party developers
-- [ ] Autoupdater???
-- [ ] Add more TODOs
+* Add GUI dashboard
+* Improve request filtering engine
+* Add plugin system
+* Add autoupdater system
+* Expand middleware API
+* Add remote debugging tools
 
-## Terms of Use
+---
 
-By downloading or using this code, you agree to the terms, conditions, and license specified in the **MAIN** branch.
+## License & Terms
 
-### Modification and Redistribution  
-If this code is modified and redistributed, the following conditions must be met:  
-- All modifications must be clearly disclosed to the user on the loading screen.  
-- A direct link to the modified source code must be provided.
-- A direct link to [LumiOS](https://github.com/LuminesenceProject/LumiOS) must also be provided.
-- You agree to all future versions of the terms.
+This project is licensed under the Apache License 2.0.
+
+By using this project, you agree to comply with its license terms.
+
+---
+
+## Modification and Redistribution
+
+If you modify and redistribute this project, you must:
+
+* Clearly disclose modifications
+* Provide a link to the original repository
+* Maintain attribution to the original project
+* Include a copy of the Apache 2.0 license
+
+---
+
+## Notes
