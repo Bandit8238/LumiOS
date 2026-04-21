@@ -1,6 +1,8 @@
 <img src="https://raw.githubusercontent.com/FritzCohen/LumiOS/refs/heads/main/images/no-bg-logo.png"/>
 Your new favorite OS
+---------------------------------
 
+To download v16 click [here](
 
 # LumiOS v16 
 
