@@ -1,10 +1,4 @@
-import Desktop from "./Desktop";
-
-type User = {
-  id?: number | string;
-  name?: string;
-  [key: string]: any;
-};
+import Desktop from "./system/desktop/Desktop";
 
 export default function App() {
   return <Desktop />;
