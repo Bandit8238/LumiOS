@@ -1,6 +1,28 @@
+import Wallpaper from "../gui/wallpaper/Wallpaper";
 import { useEffect, useState } from "react";
 
 export default function Desktop() {
+  return (
+    <div style={styles.desktop}>
+      
+      {/* BACKGROUND LAYER */}
+      <Wallpaper
+        src="/wallpapers/helios.gif"
+        darken={0.35}
+        blur={0}
+      />
+
+      {/* UI LAYER */}
+      <div style={styles.ui}>
+        <TopBar />
+        <Main />
+      </div>
+
+    </div>
+  );
+}
+
+function TopBar() {
   const [time, setTime] = useState(getTime());
 
   useEffect(() => {
@@ -12,15 +34,6 @@ export default function Desktop() {
   }, []);
 
   return (
-    <div style={styles.desktop}>
-      <TopBar time={time} />
-      <MainArea />
-    </div>
-  );
-}
-
-function TopBar({ time }: { time: string }) {
-  return (
     <div style={styles.topbar}>
       <div>🔥 Helios OS</div>
       <div>{time}</div>
@@ -28,11 +41,11 @@ function TopBar({ time }: { time: string }) {
   );
 }
 
-function MainArea() {
+function Main() {
   return (
     <div style={styles.center}>
       <h1>Desktop</h1>
-      <p>Helios OS is running.</p>
+      <p>Helios system running smoothly.</p>
     </div>
   );
 }
@@ -45,19 +58,27 @@ const styles: Record<string, React.CSSProperties> = {
   desktop: {
     width: "100vw",
     height: "100vh",
-    background: "#0b1020",
-    color: "#ffffff",
+    position: "relative",
+    overflow: "hidden",
+    fontFamily: "Arial",
+  },
+
+  ui: {
+    position: "relative",
+    zIndex: 1,
+    color: "white",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
-    fontFamily: "Arial",
   },
 
   topbar: {
     display: "flex",
     justifyContent: "space-between",
     padding: "10px 15px",
-    background: "#111827",
-    borderBottom: "1px solid #1f2937",
+    background: "rgba(17, 24, 39, 0.7)",
+    backdropFilter: "blur(10px)",
+    borderBottom: "1px solid rgba(255,255,255,0.1)",
   },
 
   center: {
