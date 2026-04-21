@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+
 import App from './App.tsx'
+
 import { KernelProvider } from './context/kernal/kernal.tsx'
 import { UserProvider } from './context/user/user.tsx'
 import WindowProvider from './context/window/WindowProvider.tsx'
