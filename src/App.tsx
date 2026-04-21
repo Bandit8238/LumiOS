@@ -1,80 +1,64 @@
-import { useEffect } from "react";
-import Desktop from "./system/Desktop";
-import { useUser } from "./context/user/user";
-import API from "./system/api/API";
-import Login from "./system/gui/components/Login/Login";
-import AutoSave from "./system/api/AutoSave";
-import Loading from "./system/gui/components/Login/Loading";
-import SetupWizard from "./system/gui/components/FirstStart/SetupWizard";
-import UpdateChecker from "./system/api/UpdateChecker";
-import defaultTheme from "./constants/defaultTheme";
-import Bios from "./system/gui/components/Bios/Bios";
-import { useWindow } from "./context/window/WindowProvider";
+import { useEffect, useState } from "react";
 
-function App() {
-	const { loggedIn, currentUser, users, login, applyTheme, applyBackground, applyPanic } = useUser();
-	const { showBios } = useWindow();
+type User = {
+  id?: number | string;
+  name?: string;
+  [key: string]: any;
+};
 
-	/**
-	 * Getting default theme stuff
-	*/
-	useEffect(() => {
-		const loadExecutable = async () => {
-			if (!currentUser && !loggedIn) {
-				applyTheme(defaultTheme);
+export default function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-				return;
-			};
-			if (currentUser == null) return;
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        setLoading(true);
 
-			applyTheme(currentUser.colorTheme);
-			applyBackground(currentUser.backgroundImage);
-			applyPanic(currentUser.panic);
-		};
+        const res = await fetch("/api/users");
 
-		loadExecutable();
-	}, [currentUser, applyTheme, applyBackground, applyPanic, loggedIn]);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
 
-	// Autologin logic
-	useEffect(() => {
-		if (loggedIn) return;
+        const data = await res.json();
+        setUsers(data);
+      } catch (err: any) {
+        setError(err.message || "Failed to fetch users");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		const autoLoginuser = users.find(user => user.autoLogin);
+    loadUsers();
+  }, []);
 
-		if (autoLoginuser) {
-			login(autoLoginuser.username, autoLoginuser.password);
-		}
-	}, [loggedIn, users, login]);
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h1>Users</h1>
 
-	// Clicking the key to go to a different website logic
-	useEffect(() => {
-		const handleKeyDown = (event: KeyboardEvent) => {
-		if (currentUser && currentUser.panic && event.key === currentUser.panic.key) {
-			window.location.href = currentUser.panic.website;
-		}
-		};
+      {loading && <p>Loading users...</p>}
 
-		window.addEventListener('keydown', handleKeyDown);
+      {error && (
+        <p style={{ color: "red" }}>
+          Error: {error}
+        </p>
+      )}
 
-		return () => {
-		window.removeEventListener('keydown', handleKeyDown);
-		};
-	}, [currentUser]);
-
-	return (
-		<>
-			{users.length == 0 ? <SetupWizard /> : loggedIn ? 
-				<Desktop /> 
-				: 
-				<Login />
-			}
-			<Loading />
-			<API />
-			<AutoSave />
-			<UpdateChecker />
-			{showBios && <Bios />}
-		</>
-	);
+      {!loading && !error && (
+        <ul>
+          {users.length === 0 ? (
+            <p>No users found</p>
+          ) : (
+            users.map((user, index) => (
+              <li key={user.id || index}>
+                {user.name || JSON.stringify(user)}
+              </li>
+            ))
+          )}
+        </ul>
+      )}
+    </div>
+  );
 }
-
-export default App;
